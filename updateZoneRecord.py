@@ -11,11 +11,11 @@ RecordName=""
 RecordValue=""
 if len(sys.argv) == 3:
 	with open(sys.argv[1], "r") as tokFP:
-		with json.load(tokFP) as tokDat:
-			AuthAPIToken = tokDat["apitoken"]
-			ZoneName = tokDat["zonename"]
-			RecordType = tokDat["recordtype"]
-			RecordName = tokDat["recordname"]	
+		tokDat = json.load(tokFP)
+		AuthAPIToken = tokDat["apitoken"]
+		ZoneName = tokDat["zonename"]
+		RecordType = tokDat["recordtype"]
+		RecordName = tokDat["recordname"]	
 	RecordValue = sys.argv[2]
 elif len(sys.argv) == 1:
 	AuthAPIToken = getpass.getpass(prompt="API-Token: ")
