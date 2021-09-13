@@ -1,0 +1,4 @@
+#! /bin/bash
+myip=$(curl https://boerwi.net/myip.php 2> /dev/null)
+cd /root/HetznerDynDNS
+/bin/python3 updateZoneRecord.py config.json $myip

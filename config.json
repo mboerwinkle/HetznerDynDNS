@@ -1,0 +1,6 @@
+{
+"apitoken":"<YOUR TOKEN HERE>",
+"zonename":"example.com",
+"recordtype":"A",
+"recordname":"home"
+}
