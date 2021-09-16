@@ -1,4 +1,13 @@
 #! /bin/bash
-myip=$(curl https://boerwi.net/myip.php 2> /dev/null)
 cd /root/HetznerDynDNS
-/bin/python3 updateZoneRecord.py config.json $myip
+myip=$(curl https://boerwi.net/myip.php 2> /dev/null)
+recordname=$(jq -Mr .recordname config.json)
+zonename=$(jq -Mr .zonename config.json)
+hostname="$recordname.$zonename"
+currentdnsip=$(getent hosts "$hostname" | cut -d' ' -f1)
+if [ $currentdnsip != $myip ]; then
+ echo "Updating IP. DNS says '$currentdnsip'. Should be '$myip'." | logger -t HetznerDynDNS
+ /bin/python3 updateZoneRecord.py config.json $myip 2>&1 | logger -t HetznerDynDNS
+else
+ echo "No action. DNS says '$currentdnsip'. Should be '$myip'." | logger -t HetznerDynDNS
+fi

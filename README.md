@@ -1,5 +1,17 @@
 # HetznerDynDNS
 
+Updates a dns record using the Hetzner DNS api. Runs as root, logs with logger. Won't access the Hetzner API unless a change needs to be made.
+
+## Dependencies
+
+- jq
+- python3
+- getent
+- date
+- bash
+- logger
+- python3 'requests' library
+
 ## Contents
 
 `config.json` must be configured for your system
